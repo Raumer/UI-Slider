@@ -218,10 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ab33b290e8a0545b4a958e47007f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthPlayer: {fileID: 737316027}
   Health: {fileID: 805628696}
   Damage: {fileID: 1485460989}
-  HealthBar: {fileID: 1684542665}
 --- !u!1 &224904442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,6 +1062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthPlayer: {fileID: 737316027}
+  Player: {fileID: 30383886}
 --- !u!114 &1684542666
 MonoBehaviour:
   m_ObjectHideFlags: 0
