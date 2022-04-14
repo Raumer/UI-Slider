@@ -3,41 +3,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Slider HealthPlayer;
     [SerializeField] private Button Health;
     [SerializeField] private Button Damage;
-    [SerializeField] private HealthBar HealthBar;
+    [SerializeField] public Action<int> HealthChanged;
 
-    private float _deltaHealth = 10f;
-    private float _playerHealth = 50f;
+    private int _deltaHealth = 10;
+    private int _playerHealth = 50;
+    private int _minPlayerHealth = 0;
+    private int _maxPlayerHealth = 50;
 
     public void OnButtonClick(Button name)
     {
         if (name == Health)
         {
-            if (_playerHealth < HealthPlayer.maxValue)
-            {
-                _playerHealth += _deltaHealth;
-            }
+            SetHealth(_deltaHealth);
         }
         else
              if (name == Damage)
         {
-            if (_playerHealth > HealthPlayer.minValue)
-            {
-                _playerHealth -= _deltaHealth;
-            }
+            SetHealth(-_deltaHealth);
         }
     }
 
-    private void Update()
+    private void SetHealth(int value)
     {
-        if (_deltaHealth != 0)
+        int _checkValueHealth = _playerHealth + value;
+
+        if (_checkValueHealth <= _maxPlayerHealth)
         {
-            HealthBar.MoveSlider(_playerHealth);
+            if (_checkValueHealth >= _minPlayerHealth)
+            {
+                _playerHealth = _checkValueHealth;
+                HealthChanged?.Invoke(value);
+            }
         }
-    }    
+    }
 }

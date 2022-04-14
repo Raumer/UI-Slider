@@ -7,18 +7,38 @@ using TMPro;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider HealthPlayer;
-    
+    [SerializeField] private Player Player;
+
     private float _stepSliderMove = 0.2f;
     private float _targetSliderPosition = 50;
 
-    public void MoveSlider(float _deltaSlider)
+    private void OnEnable()
     {
-       _targetSliderPosition = _deltaSlider;          
-    }    
-
-    void Update()
-    {
-        HealthPlayer.value = Mathf.MoveTowards(HealthPlayer.value, _targetSliderPosition, _stepSliderMove);
+        Player.HealthChanged += ChangeBar;
     }
+
+    private void OnDisable()
+    {
+        Player.HealthChanged -= ChangeBar;
+    }
+
+    private void ChangeBar(int value)
+    {
+        _targetSliderPosition += value;
+
+        StartCoroutine(ChangeHealth());
+    }
+
+    private IEnumerator ChangeHealth()
+    {
+
+        while (HealthPlayer.value != _targetSliderPosition)
+        {
+            HealthPlayer.value = Mathf.MoveTowards(HealthPlayer.value, _targetSliderPosition, _stepSliderMove);
+
+            yield return null;
+        }
+    }
+
 }
 
