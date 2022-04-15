@@ -12,6 +12,8 @@ public class HealthBar : MonoBehaviour
     private float _stepSliderMove = 0.2f;
     private float _targetSliderPosition = 50;
 
+    private Coroutine _workingCoroutine;   
+
     private void OnEnable()
     {
         _player.HealthChanged += ChangeBar;
@@ -24,14 +26,17 @@ public class HealthBar : MonoBehaviour
 
     private void ChangeBar(int value)
     {
-        _targetSliderPosition += value;
+        _targetSliderPosition = value;
 
-        StartCoroutine(ChangeHealth());
+        if (_workingCoroutine != null)
+        {
+            StopCoroutine(_workingCoroutine);            
+        }
+        _workingCoroutine = StartCoroutine(ChangeHealth());
     }
 
     private IEnumerator ChangeHealth()
     {
-
         while (_healthPlayer.value != _targetSliderPosition)
         {
             _healthPlayer.value = Mathf.MoveTowards(_healthPlayer.value, _targetSliderPosition, _stepSliderMove);
@@ -39,6 +44,5 @@ public class HealthBar : MonoBehaviour
             yield return null;
         }
     }
-
 }
 

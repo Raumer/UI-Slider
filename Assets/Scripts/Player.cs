@@ -16,23 +16,20 @@ public class Player : MonoBehaviour
 
     public void Heal()
     {
-        if (_health < _maxHealth)
-        {
-            SetHealth(_deltaHealth);
-        }
+        SetHealth(_deltaHealth);
     }
 
     public void Damage()
     {
-        if (_health > _minHealth)
-        {
-            SetHealth(-_deltaHealth);
-        }
+        SetHealth(-_deltaHealth);
     }
 
-    private void SetHealth(int value)
+    private void SetHealth(int _deltaHealth)
     {
-        _health  += value;
-        HealthChanged?.Invoke(value);
+        int _testValue = _health + _deltaHealth;
+
+        _health = Mathf.Clamp(_health + _deltaHealth, _minHealth, _maxHealth);
+
+        HealthChanged?.Invoke(_health);
     }
 }
