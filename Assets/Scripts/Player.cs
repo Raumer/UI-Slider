@@ -7,23 +7,24 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Button Health;
-    [SerializeField] private Button Damage;
-    [SerializeField] public Action<int> HealthChanged;
+    public Action<int> HealthChanged;
 
     private int _deltaHealth = 10;
-    private int _playerHealth = 50;
-    private int _minPlayerHealth = 0;
-    private int _maxPlayerHealth = 50;
+    private int _health = 50;
+    private int _minHealth = 0;
+    private int _maxHealth = 50;
 
-    public void OnButtonClick(Button name)
+    public void Heal()
     {
-        if (name == Health)
+        if (_health < _maxHealth)
         {
             SetHealth(_deltaHealth);
         }
-        else
-             if (name == Damage)
+    }
+
+    public void Damage()
+    {
+        if (_health > _minHealth)
         {
             SetHealth(-_deltaHealth);
         }
@@ -31,15 +32,7 @@ public class Player : MonoBehaviour
 
     private void SetHealth(int value)
     {
-        int _checkValueHealth = _playerHealth + value;
-
-        if (_checkValueHealth <= _maxPlayerHealth)
-        {
-            if (_checkValueHealth >= _minPlayerHealth)
-            {
-                _playerHealth = _checkValueHealth;
-                HealthChanged?.Invoke(value);
-            }
-        }
+        _health  += value;
+        HealthChanged?.Invoke(value);
     }
 }

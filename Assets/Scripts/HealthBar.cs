@@ -1,25 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Slider HealthPlayer;
-    [SerializeField] private Player Player;
+    [SerializeField] private Slider _healthPlayer;
+    [SerializeField] private Player _player;
 
     private float _stepSliderMove = 0.2f;
     private float _targetSliderPosition = 50;
 
     private void OnEnable()
     {
-        Player.HealthChanged += ChangeBar;
+        _player.HealthChanged += ChangeBar;
     }
 
     private void OnDisable()
     {
-        Player.HealthChanged -= ChangeBar;
+        _player.HealthChanged -= ChangeBar;
     }
 
     private void ChangeBar(int value)
@@ -32,9 +32,9 @@ public class HealthBar : MonoBehaviour
     private IEnumerator ChangeHealth()
     {
 
-        while (HealthPlayer.value != _targetSliderPosition)
+        while (_healthPlayer.value != _targetSliderPosition)
         {
-            HealthPlayer.value = Mathf.MoveTowards(HealthPlayer.value, _targetSliderPosition, _stepSliderMove);
+            _healthPlayer.value = Mathf.MoveTowards(_healthPlayer.value, _targetSliderPosition, _stepSliderMove);
 
             yield return null;
         }

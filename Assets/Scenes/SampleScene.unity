@@ -218,8 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ab33b290e8a0545b4a958e47007f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: {fileID: 805628696}
-  Damage: {fileID: 1485460989}
 --- !u!1 &224904442
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,11 +733,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 30383886}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 2
+        m_MethodName: Heal
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 805628696}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -882,11 +880,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 30383886}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 2
+        m_MethodName: Damage
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1485460989}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1061,8 +1059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578cd37b1cca2f246831f9a92c51caf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthPlayer: {fileID: 737316027}
-  Player: {fileID: 30383886}
+  _healthPlayer: {fileID: 737316027}
+  _player: {fileID: 30383886}
 --- !u!114 &1684542666
 MonoBehaviour:
   m_ObjectHideFlags: 0
